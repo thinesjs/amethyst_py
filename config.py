@@ -1,4 +1,5 @@
 import configparser
+import random
 
 
 class Config:
@@ -23,3 +24,7 @@ class Config:
 
     def getRetryInterval(self):
         return self.config['OPTIONS']['RETRY_INTERVAL']
+
+    def getRandApiKey(self):
+        api_keys = (self.config['OPTIONS']['API_KEY']).split(',')
+        return random.choice(api_keys)

@@ -1,30 +1,12 @@
-import configparser
-import html
 import random
-
 import requests
-from openai import OpenAI
 from time import time
 from urllib.parse import quote
+from chatgpt import getchatgptanswer
 from config import Config
 
 config = Config('config.ini')
 config.readConfig()
-
-
-client = OpenAI(
-    api_key=config.getApiKey()
-)
-
-# response = client.chat.completions.create(
-#     model="gpt-3.5-turbo",
-#     response_format={"type": "json_object"},
-#     messages=[
-#         {"role": "system", "content": "You are a helpful assistant designed to output JSON."},
-#         {"role": "user", "content": "Who won the world series in 2020?"}
-#     ]
-# )
-# print(response.choices[0].message.content)
 
 base_url = config.getFormsURL()
 
@@ -35,7 +17,6 @@ linear_scale_options = [
 boolean_options = [
     ["Yes"], ["No"]
 ]
-
 
 # QUESTIONS
 answer_list = []
@@ -57,31 +38,47 @@ answer_list.append([None, 1013725562, random.choice(gender_list), 0])
 answer_list.append([None, 1092006797, random.choice(linear_scale_options), 0])
 
 # Q4 - What factors influence your decision to shop at a brick-and-mortar store?
-answer_list.append([None, 1703416426, ["long_text"], 0])
+q4_response = getchatgptanswer("What factors influence your decision to shop at a brick-and-mortar store?").replace(' ', '+')
+answer_list.append([None, 1703416426, [f"{q4_response}"], 0])
 # Q5 - What types of products do you prefer to purchase in-store rather than online?
-answer_list.append([None, 1508710175, ["long_text"], 0])
+q5_response = getchatgptanswer("What types of products do you prefer to purchase in-store rather than online?").replace(' ', '+')
+answer_list.append([None, 1508710175, [f"{q5_response}"], 0])
 # Q6 - Have you ever received personalised recommendations or greetings from a brick-and-mortar store?
-answer_list.append([None, 1894295135, random.choice(boolean_options), 0])
+q6_choice = random.choice(boolean_options)
+answer_list.append([None, 1894295135, q6_choice, 0])
 # Q7 - If yes, how did you feel about the personalised experience? Did it enhance your shopping experience?
-answer_list.append([None, 854436901, ["long_text"], 0])
+if q6_choice == '["Yes"]':
+    q7_response = getchatgptanswer("How did you feel about receiving personalised experience in the past? Did it enhance your shopping experience?").replace(' ', '+')
+else:
+    q7_response = getchatgptanswer("How do you feel about receiving personalised experience in the future? Will it enhance your shopping experience?").replace(' ', '+')
+answer_list.append([None, 854436901, [f"{q7_response}"], 0])
 # Q8 - How comfortable are you with the use of facial recognition technology in brick-and-mortar stores?
-answer_list.append([None, 1499900330, random.choice(linear_scale_options), 0])
+q8_choice = random.choice(linear_scale_options)
+answer_list.append([None, 1499900330, q8_choice, 0])
 # Q9 - What concerns, if you are not comfortable, do you have about privacy and data security related to facial recognition?
-answer_list.append([None, 1935879695, ["long_text"], 0])
+if q8_choice == '["1"]' or '["2"]':
+    q9_response = getchatgptanswer("What concerns do you have about privacy and data security related to facial recognition that will make you to not participate in this proposed solution?").replace(' ', '+')
+else:
+    q9_response = getchatgptanswer("What concerns do you have about privacy and data security related to facial recognition?").replace(' ', '+')
+answer_list.append([None, 1935879695, [f"{q9_response}"], 0])
 # Q10 - Would you appreciate receiving personalised greetings or recommendations based on your previous shopping history?
 answer_list.append([None, 1051691068, random.choice(boolean_options), 0])
 # Q11 - What types of personalised recommendations would you find most valuable?
-answer_list.append([None, 26266239, ["long_text"], 0])
+q11_response = getchatgptanswer("What types of products do you prefer to purchase in-store rather than online?").replace(' ', '+')
+answer_list.append([None, 26266239, [f"{q11_response}"], 0])
 # Q12 - Are you currently enrolled in any loyalty programs offered by brick-and-mortar stores?
 answer_list.append([None, 732149606, random.choice(boolean_options), 0])
 # Q13 - What incentives or rewards would encourage you to participate in a loyalty program?
-answer_list.append([None, 1051389942, ["long_text"], 0])
+q13_response = getchatgptanswer("What incentives or rewards would encourage you to participate in a loyalty program?").replace(' ', '+')
+answer_list.append([None, 1051389942, [f"{q13_response}"], 0])
 # Q14 - How likely are you to return to a store that offers personalised greetings, recommendations, or rewards?
 answer_list.append([None, 323706928, random.choice(linear_scale_options), 0])
 # Q15 - Do you have any additional suggestions or feedback on how brick-and-mortar stores can improve the shopping experience through technology?
-answer_list.append([None, 223764250, ["long_text"], 0])
+q15_response = getchatgptanswer("Do you have any additional suggestions or feedback on how brick-and-mortar stores can improve the shopping experience through technology?").replace(' ', '+')
+answer_list.append([None, 223764250, [f"{q15_response}"], 0])
 # Q16 - What factors influence your decision to shop at a particular brick-and-mortar store?
-answer_list.append([None, 1376724546, ["long_text"], 0])
+q16_response = getchatgptanswer("What factors influence your decision to shop at a particular brick-and-mortar store? (That one offline shop that you always go to)").replace(' ', '+')
+answer_list.append([None, 1376724546, [f"{q16_response}"], 0])
 # Q17 - How important is customer service in your overall shopping experience?
 answer_list.append([None, 1056742149, random.choice(linear_scale_options), 0])
 # Q18 - Do you typically use mobile applications while shopping in-store?
@@ -89,10 +86,8 @@ answer_list.append([None, 1613996379, random.choice(boolean_options), 0])
 # Q19- Would you be willing to download and use a mobile application from your favourite brick-and-mortar store?
 answer_list.append([None, 577038100, random.choice(boolean_options), 0])
 # Q20- Is there anything else you would like to share about your shopping habits, preferences, or experiences?
-answer_list.append([None, 368095154, ["long_text"], 0])
-
-# ANSWERS
-
+q20_response = getchatgptanswer("Is there anything else you would like to share about your shopping habits, preferences, or experiences?").replace(' ', '+')
+answer_list.append([None, 368095154, [f"{q20_response}"], 0])
 
 # LAST QUESTION
 last_list = {
