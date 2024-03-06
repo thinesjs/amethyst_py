@@ -16,6 +16,7 @@ def getchatgptanswer(question):
             {"role": "user", "content": f"{question}"}
         ]
     )
+    # print(response)
     json_response = json.loads(response.choices[0].message.content)
     print(f"{question}:{json_response['response']}")
     return json_response['response']
