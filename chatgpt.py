@@ -9,10 +9,6 @@ from time import sleep
 config = Config('config.ini')
 config.readConfig()
 
-# openai.api_key = config.getPkApiKey()
-openai.api_base = 'https://api.pawan.krd/v1'
-
-
 def get_chatgpt_answer(question):
     try:
         response = OpenAI(api_key=config.getRandApiKey()).chat.completions.create(
