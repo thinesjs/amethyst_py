@@ -11,7 +11,8 @@ base_url = config.getFormsURL()
 
 # GLOBAL GFORMS OPTIONS
 linear_scale_options = [
-    ["1"], ["2"], ["3"], ["4"], ["5"]
+    # ["1"], ["2"], ["3"],
+    ["4"], ["5"]
 ]
 boolean_options = [
     ["Yes"],  # ["No"]
@@ -44,7 +45,7 @@ def main():
     # answer_list.append([None, 1703416426, [f"{q4_response}"], 0])
     # Q5 - What types of products do you prefer to purchase in-store rather than online?
     q5_response = get_chatgpt_answer(
-        "What types of products do you prefer to purchase in-store rather than online? (No clothes and shoes are allowed)").replace(
+        "What types of products do you prefer to purchase in-store rather than online? (suggest fragile products, avoid daily need items)").replace(
         ' ', '+')
     answer_list.append([None, 1508710175, [f"{q5_response}"], 0])
     # Q6 - Have you ever received personalised recommendations or greetings from a brick-and-mortar store?
@@ -53,11 +54,11 @@ def main():
     # Q7 - If yes, how did you feel about the personalised experience? Did it enhance your shopping experience?
     if q6_choice == '["Yes"]':
         q7_response = get_chatgpt_answer(
-            "How did you feel about receiving personalised experience in the past? Did it enhance your shopping experience?").replace(
+            "Besides past purchase history, preferences and discovering new products, How do you feel about receiving personalised experience in the past? How did it enhance your shopping experience?").replace(
             ' ', '+')
     else:
         q7_response = get_chatgpt_answer(
-            "How do you feel about receiving personalised experience in the future? Will it enhance your shopping experience?").replace(
+            "How receiving personalised experience, loyalty programs or gamification will enhance your shopping experience?").replace(
             ' ', '+')
     answer_list.append([None, 854436901, [f"{q7_response}"], 0])
     # Q8 - How comfortable are you with the use of facial recognition technology in brick-and-mortar stores?
@@ -89,7 +90,7 @@ def main():
     answer_list.append([None, 323706928, random.choice(linear_scale_options), 0])
     # Q15 - Do you have any additional suggestions or feedback on how brick-and-mortar stores can improve the shopping experience through technology?
     q15_response = get_chatgpt_answer(
-        "Do you have any additional suggestions or feedback on how brick-and-mortar stores can improve the shopping experience through technology?").replace(
+        "Do you have any additional suggestions or feedback on how brick-and-mortar stores can improve the shopping experience through technology? (avoid beacon technology)").replace(
         ' ', '+')
     answer_list.append([None, 223764250, [f"{q15_response}"], 0])
     # Q16 - What factors influence your decision to shop at a particular brick-and-mortar store?

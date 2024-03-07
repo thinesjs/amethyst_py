@@ -28,3 +28,13 @@ class Config:
     def getRandApiKey(self):
         api_keys = (self.config['OPTIONS']['API_KEY']).split(',')
         return random.choice(api_keys)
+
+    def getRandGPTModel(self):
+        models = (self.config['OPTIONS']['CHATGPT_MODELS']).split(',')
+        return random.choice(models)
+
+    def getGPTModel(self):
+        return self.config['OPTIONS']['FORCE_MODEL']
+
+    def getPkApiKey(self):
+        return self.config['MISC']['PK_API_KEY']
