@@ -12,12 +12,15 @@ base_url = config.getFormsURL()
 
 # GLOBAL GFORMS OPTIONS
 linear_scale_options = [
-    # ["1"], ["2"],
-    ["3"],
-    ["4"], ["5"]
+    # ["1"],
+    ["2"],
+    # ["3"],
+    # ["4"], ["5"]
 ]
 boolean_options = [
-    ["Yes"], ["Maybe"]
+    # ["Yes"],
+    ["No"],
+    # ["Maybe"]
 ]
 
 
@@ -33,7 +36,8 @@ def main(name):
     # Q1
     q1 = [
         ["18-23"], ["24-30"],
-        # ["30-40"], ["40+"],
+        # ["30-40"],
+        # ["40+"],
     ]
     answer_list.append([None, 645209432, random.choice(q1), 0])
 
@@ -46,7 +50,7 @@ def main(name):
     # Q3
     q3 = [
         ["Chinese"],
-        # ["Malay"],
+        ["Malay"],
         ["English"],
         # ["Tamil"]
     ]
@@ -54,7 +58,9 @@ def main(name):
 
     # Q4
     q4 = [
-        ["Student"], ["Unemployed"], ["Employed+full-time"], ["Employed+part-time"]
+        # ["Student"],
+        # ["Unemployed"],
+        ["Employed+full-time"], ["Employed+part-time"]
     ]
     answer_list.append([None, 2093334470, random.choice(q4), 0])
 
@@ -277,25 +283,15 @@ class AmethystPy(object):
         try:
 
             names = [
-                ["Faiz"],
-                # ["Ravi+Kumar"],
-                ["Nora+Aziz"],
-                ["Goh+Soon+Huat"],
-                # ["Raj+Singh"],
-                ["Farid+tsmail"],
-                ["Aaron+tan"],
-                ["nur+hidayah"],
-                ["Jason+teoh"],
-                ["Amir+Hamzah"],
-                # ["Preeti+Nair"],
-                ["Fatin"],
-                ["Lina+Cheah"],
-                ["Aisyah+yusof"],
-                ["Nadiah+hassan"],
-                ["Tan+Jin+Wei"],
-                ["Hasan+zulkifli"],
-                ["Rachel"],
-                ["Daphne+Chong"]
+                # ["azman+salleh"],
+                # ["Nurul+Izzahh"],
+                # ["Chan+wei+ling"],
+                # ["Mohd+Ridzuan"],
+                # ["lina+tan"],
+                ["Khadijah"],
+                ["Faizal+hamid+Abbidin"],
+                ["Soo+Lee"],
+                ["rosli+mahmood"]
             ]
 
             for x in names:
