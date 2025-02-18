@@ -13,37 +13,47 @@ base_url = config.getFormsURL()
 # GLOBAL GFORMS OPTIONS
 linear_scale_options = [
     # ["1"],
-    ["2"],
-    # ["3"],
-    # ["4"], ["5"]
+    # ["2"],
+    ["3"],
+    ["4"], ["5"]
 ]
 boolean_options = [
-    # ["Yes"],
+    ["Yes"],
+    ["Yes"],
+    ["Yes"],
     ["No"],
     # ["Maybe"]
 ]
 
 
-def main(name):
+def main():
     # QUESTIONS
     answer_list = []
     start_answering_time = time()
 
     # Q0
-    # name = get_random_name()
-    answer_list.append([None, 1670562836, name, 0])
+    q0 = [
+        ["Male"],
+        # ["Male"],
+        ["Female"],
+    ]
+    answer_list.append([None, 1777331266, random.choice(q0), 0])
 
     # Q1
     q1 = [
-        ["18-23"], ["24-30"],
-        # ["30-40"],
+        ["18-23"],
+        ["24-30"],
+        ["30-40"],
         # ["40+"],
     ]
     answer_list.append([None, 645209432, random.choice(q1), 0])
 
     # Q2
     q2 = [
-        ["Secondary"], ["Diploma/Foundation"], ["Bachelors+Degree"]
+        # ["Secondary"],
+        # ["Diploma/Foundation"],
+        ["Bachelors+Degree"],
+        # ["Masters+Degree"]
     ]
     answer_list.append([None, 367474266, random.choice(q2), 0])
 
@@ -58,7 +68,7 @@ def main(name):
 
     # Q4
     q4 = [
-        # ["Student"],
+        ["Student"],
         # ["Unemployed"],
         ["Employed+full-time"], ["Employed+part-time"]
     ]
@@ -81,86 +91,55 @@ def main(name):
     answer_list.append([None, 1181954475, flattened_selected_options, 0])
 
     # Q7
-    q7 = [
-        ["Social+media"],
-        ["Perdana+Botanical+Garden's+official+website"],
-        ["Friends+or+family"],
-        ["Local+newspapers+or+magazines"]
-    ]
-    selected_options = random.sample(q7, random.randint(2, 4))
-    flattened_selected_options = [item for sublist in selected_options for item in sublist]
-    answer_list.append([None, 1775914105, flattened_selected_options, 0])
+    answer_list.append([None, 516863531, random.choice(boolean_options), 0])
 
     # Q8
-    q8 = [
-        ["Directions+to+a+destination"],
-        ["Real+time+location"],
-        ["Points+of+interest"],
-        ["Interactive+Guide"],
-        ["Alerts+of+issues+in+the+park"],
-        ["Reviews+and+photo+sharing"]
-    ]
-
-    selected_options = random.sample(q8, random.randint(2, 4))
-    flattened_selected_options = [item for sublist in selected_options for item in sublist]
-    answer_list.append([None, 108529918, flattened_selected_options, 0])
+    answer_list.append([None, 1107609351, random.choice(linear_scale_options), 0])
 
     # Q9
     q9 = [
-        ["Physical+maps"],
-        ["Asking+staff+or+other+visitors"],
-        ["Mobile+phone+GPS"]
+        ["iOS+(Apple)"],
+        ["Android"],
     ]
-
-    selected_options = random.sample(q9, random.randint(2, 3))
-    flattened_selected_options = [item for sublist in selected_options for item in sublist]
-    answer_list.append([None, 1255921539, flattened_selected_options, 0])
+    answer_list.append([None, 1255921539, random.choice(q9), 0])
 
     # Q10
-    answer_list.append([None, 1107609351, random.choice(boolean_options), 0])
+    answer_list.append([None, 381747203, random.choice(boolean_options), 0])
 
-    # Q11
+    # Q11 - section 4 q1
     q11 = [
-        ["Interactive+map"],
-        ["Points+of+interest+markers"],
-        ["Walking+route+suggestions"],
-        ["Accessibility+information"],
-        ["Real-time+location+tracking"]
+        ["Interactive+map/navigation"],
+        ["Event+information"],
+        ["Photo/video+sharing"],
+        ["Factual+information+about+the+plants+and+species"],
+        ["Comment/suggestion+feature+(Social+Media)"]
     ]
 
     selected_options = random.sample(q11, random.randint(2, 4))
     flattened_selected_options = [item for sublist in selected_options for item in sublist]
-    answer_list.append([None, 267521905, flattened_selected_options, 0])
+    answer_list.append([None, 1416352018, flattened_selected_options, 0])
 
     # Q12
-    answer_list.append([None, 1416352018, random.choice(linear_scale_options), 0])
+    answer_list.append([None, 235905542, random.choice(linear_scale_options), 0])
 
-    # Q13 - What incentives or rewards would encourage you to participate in a loyalty program?
-    q13 = [
-        ["Upcoming+events"],
-        ["Plant+and+wildlife+information"],
-        ["Maintenance+updates"],
-        ["Visitor+tips"],
-        ["Historical+facts"]
-    ]
+    # Q13
+    answer_list.append([None, 1494602752, random.choice(linear_scale_options), 0])
 
-    selected_options = random.sample(q13, random.randint(2, 4))
-    flattened_selected_options = [item for sublist in selected_options for item in sublist]
-    answer_list.append([None, 186827964, flattened_selected_options, 0])
-
-    # Q14
+    # Q14 - section 5 q1
     answer_list.append([None, 136187744, random.choice(boolean_options), 0])
 
     # Q15
     answer_list.append([None, 1585386381, random.choice(linear_scale_options), 0])
 
-    # Q16
-    answer_list.append([None, 1223738549, random.choice(boolean_options), 0])
+    # Q16 - section 6 q1
+    q16_choice = random.choice(boolean_options)
+    answer_list.append([None, 1223738549, q16_choice, 0])
 
     # Q17
-    answer_list.append([None, 313300307, random.choice(linear_scale_options), 0])
+    if q16_choice == ["Yes"]:
+        answer_list.append([None, 313300307, random.choice(linear_scale_options), 0])
 
-    # # Q18
+    # Q18
     q18 = [
         ["Availability+calendar"],
         ["Pricing+information"],
@@ -169,35 +148,45 @@ def main(name):
         ["Cancellation+and+refund+policies"]
     ]
 
-    selected_options = random.sample(q18, random.randint(2, 4))
+    selected_options = random.sample(q18, random.randint(2, 5))
     flattened_selected_options = [item for sublist in selected_options for item in sublist]
     answer_list.append([None, 256970674, flattened_selected_options, 0])
 
-    # # Q19
+    # Q19 change
+    q19 = [
+        ["Yes"],
+        ["No"],
+        ["I'm+okay+with+both"]
+    ]
+    answer_list.append([None, 450928663, random.choice(q19), 0])
+
+    # Q20 - section 7 q1
     answer_list.append([None, 1568485898, random.choice(linear_scale_options), 0])
-    #
-    # # Q20
-    q20 = [
+
+    # Q21
+    q21 = [
         ["Light+theme"],
         ["Dark+theme"],
-        ["High+contrast"],
-        ["Nature-inspired+colors"]
+        ["Light+or+Dark+depending+on+the+time+of+the+day"],
+        ["Nature-inspired+colors"],
+        ["High+contrast"]
     ]
-    answer_list.append([None, 570495644, random.choice(q20), 0])
 
-    # # Q21
-    q21 = [
+    answer_list.append([None, 570495644, random.choice(q21), 0])
+
+    # Q22
+    q22 = [
         ["Simple+and+minimalistic+designs"],
         ["Detailed+and+information-rich+designs"],
         ["Interactive+and+dynamic+designs"]
     ]
 
-    selected_options = random.sample(q21, random.randint(2, 3))
+    selected_options = random.sample(q22, random.randint(2, 3))
     flattened_selected_options = [item for sublist in selected_options for item in sublist]
     answer_list.append([None, 857331386, flattened_selected_options, 0])
 
-    # Q22
-    q22 = [
+    # Q23
+    q23 = [
         ["Clear+and+readable+fonts"],
         ["Consistent+design+throughout+the+app"],
         ["Easy-to-find+buttons+and+links"],
@@ -206,39 +195,45 @@ def main(name):
         ["Accessible+design+for+people+with+disabilities"]
     ]
 
-    selected_options = random.sample(q22, random.randint(2, 4))
+    selected_options = random.sample(q23, random.randint(2, 3))
     flattened_selected_options = [item for sublist in selected_options for item in sublist]
     answer_list.append([None, 153947544, flattened_selected_options, 0])
 
-    # Q23
-    answer_list.append([None, 1494602752, random.choice(linear_scale_options), 0])
-
     # Q24
-    # q24_response = get_chatgpt_answer(
+    q24 = [
+        ["More+visual+elements+(images,+videos)"],
+        ["More+textual+information"],
+        ["A+balanced+mix+of+both"]
+    ]
+
+    answer_list.append([None, 1618855870, random.choice(q24), 0])
+
+    # Q26
+    # q26_response = get_chatgpt_answer(
     #     "Do you have any suggestions to improve the mobile application for Perdana Botanical Garden?").replace(' ',
     #                                                                                                            '+')
     try:
-        q24_response = "no"
-        q24_response_raw = get_chatgpt_answer(
+        q26_response = "no"
+        q26_response_raw = get_chatgpt_answer(
             "Do you have any suggestions to improve the mobile application for Perdana Botanical Garden?").replace(' ',
                                                                                                                    '+')
 
         choices = [True, False]
         pp = random.choice(choices)
         if pp is True:
-            q24_response_raw = q24_response_raw[0].lower() + q24_response_raw[1:]
-            q24_response = q24_response_raw.replace(' ', '+')
+            q26_response_raw = q26_response_raw[0].lower() + q26_response_raw[1:]
+            q26_response = q26_response_raw.replace(' ', '+')
         else:
-            q24_response = q24_response_raw.replace(' ', '+')
+            q26_response = q26_response_raw.replace(' ', '+')
 
     except:
-        q24_response = "no".replace(' ', '+')
+        q26_response = "no".replace(' ', '+')
 
     end_answering_time = time()
 
     # LAST QUESTION
     last_list = {
-        'entry.1799202772': q24_response,
+        'entry.1799202772': q26_response,
         'entry.1799202772_sentinel': '',
     }
 
@@ -281,22 +276,9 @@ class AmethystPy(object):
         attempts = int(config.getMaxAttempt())
         # input(f"Press ENTER to submit a response:")
         try:
-
-            names = [
-                # ["azman+salleh"],
-                # ["Nurul+Izzahh"],
-                # ["Chan+wei+ling"],
-                # ["Mohd+Ridzuan"],
-                # ["lina+tan"],
-                ["Khadijah"],
-                ["Faizal+hamid+Abbidin"],
-                ["Soo+Lee"],
-                ["rosli+mahmood"]
-            ]
-
-            for x in names:
-                # print(f"Execution started for {x + 1} response...")
-                main(x)
+            for x in range(attempts):
+                print(f"Execution started for {x + 1} response...")
+                main()
             # print(f"Execution started...")
             # main()
             # print(f"Execution completed!")
